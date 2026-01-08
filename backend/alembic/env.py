@@ -33,6 +33,8 @@ from app.models.user import User
 from app.core.database import Base
 from app.models.deal import Deal
 from app.models.activity import Activity
+from app.models.ic_memo import ICMemo
+
 
 target_metadata = Base.metadata
 
