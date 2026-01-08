@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from app.core.deps import get_db
 from app.models.deal import Deal
 from app.models.activity import Activity
+from app.core.constants import DEAL_STAGES
+
 
 router = APIRouter(prefix="/deals", tags=["deals"])
 
@@ -12,6 +14,9 @@ def create_deal(
     owner_id: str,
     db: Session = Depends(get_db)
 ):
+    if "sourced" not in DEAL_STAGES:
+        raise HTTPException(status_code=500, detail="Invalid stage config")
+
     deal = Deal(
         name=name,
         owner_id=owner_id,
@@ -38,6 +43,9 @@ def move_stage(
     deal = db.query(Deal).filter(Deal.id == deal_id).first()
     if not deal:
         raise HTTPException(status_code=404, detail="Deal not found")
+    if to_stage not in DEAL_STAGES:
+        raise HTTPException(status_code=400, detail="Invalid stage")
+
 
     from_stage = deal.stage
     deal.stage = to_stage
