@@ -31,6 +31,9 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 from app.models.user import User
 from app.core.database import Base
+from app.models.deal import Deal
+from app.models.activity import Activity
+
 target_metadata = Base.metadata
 
 
