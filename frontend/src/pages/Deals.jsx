@@ -14,8 +14,8 @@ export default function Deals() {
 
   function groupedDeals() {
     const map = {};
-    DEAL_STAGES.forEach(s => (map[s.key] = []));
-    deals.forEach(d => map[d.stage]?.push(d));
+    DEAL_STAGES.forEach((s) => (map[s.key] = []));
+    deals.forEach((d) => map[d.stage]?.push(d));
     return map;
   }
 
@@ -31,10 +31,8 @@ export default function Deals() {
         { method: "PATCH" }
       );
 
-      setDeals(deals =>
-        deals.map(d =>
-          d.id === dealId ? { ...d, stage: toStage } : d
-        )
+      setDeals((deals) =>
+        deals.map((d) => (d.id === dealId ? { ...d, stage: toStage } : d))
       );
     } catch (e) {
       alert("Stage update failed");
@@ -49,7 +47,7 @@ export default function Deals() {
 
       <DragDropContext onDragEnd={onDragEnd}>
         <div style={{ display: "flex", gap: 16 }}>
-          {DEAL_STAGES.map(stage => (
+          {DEAL_STAGES.map((stage) => (
             <Droppable droppableId={stage.key} key={stage.key}>
               {(provided) => (
                 <div
@@ -85,7 +83,12 @@ export default function Deals() {
                             ...provided.draggableProps.style,
                           }}
                         >
-                          <strong>{deal.name}</strong>
+                          <a
+                            href={`/deals/${deal.id}/memo`}
+                            style={{ textDecoration: "none", color: "#111" }}
+                          >
+                            <strong>{deal.name}</strong>
+                          </a>
                         </div>
                       )}
                     </Draggable>
