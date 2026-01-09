@@ -21,14 +21,14 @@ export default function Login() {
   }
 
   return (
-    <div style={{ padding: 40 }}>
+    <div className="page" style={{ maxWidth: 400 }}>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
+        <input style={{ width: "100%", marginBottom: 10 }} placeholder="Email" onChange={e => setEmail(e.target.value)} />
         <br />
-        <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+        <input style={{ width: "100%", marginBottom: 10 }} type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
         <br />
-        <button>Login</button>
+        <button style={{ width: "100%" }}>Login</button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>

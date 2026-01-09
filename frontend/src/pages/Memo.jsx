@@ -51,17 +51,29 @@ export default function Memo() {
   }
 
   return (
-    <div style={{ display: "flex", padding: 20, gap: 20 }}>
+    <div className="page" style={{ display: "flex", gap: 24 }}>
       {/* Memo Editor */}
       <div style={{ flex: 2 }}>
         <h2>IC Memo</h2>
 
         {Object.keys(EMPTY_MEMO).map((key) => (
-          <div key={key} style={{ marginBottom: 12 }}>
-            <label><strong>{key.replace("_", " ")}</strong></label>
+          <div key={key} style={{ marginBottom: 16 }}>
+            <label
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                textTransform: "uppercase",
+              }}
+            >
+              {key.replace("_", " ")}
+            </label>
             <textarea
               rows={4}
-              style={{ width: "100%" }}
+              style={{
+                width: "100%",
+                marginTop: 6,
+                background: readOnly ? "#f8f9fa" : "white",
+              }}
               value={content[key]}
               onChange={(e) => updateField(key, e.target.value)}
               readOnly={readOnly}
@@ -75,25 +87,44 @@ export default function Memo() {
       </div>
 
       {/* Version History */}
-      <div style={{ flex: 1 }}>
+      <div
+        style={{
+          flex: 1,
+          background: "#f8f9fa",
+          padding: 16,
+          borderRadius: 10,
+          height: "fit-content",
+        }}
+      >
         <h3>Version History</h3>
+
         <ul style={{ listStyle: "none", padding: 0 }}>
           {versions.map((v) => (
             <li key={v.id} style={{ marginBottom: 8 }}>
-              <button onClick={() => loadVersion(v.id)}>
+              <button
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                }}
+                onClick={() => loadVersion(v.id)}
+              >
                 Version {v.version}
               </button>
             </li>
           ))}
         </ul>
 
-        <button onClick={() => {
-          setContent(EMPTY_MEMO);
-          setReadOnly(false);
-        }}>
+        <button
+          style={{ marginTop: 12, width: "100%" }}
+          onClick={() => {
+            setContent(EMPTY_MEMO);
+            setReadOnly(false);
+          }}
+        >
           New Draft
         </button>
       </div>
     </div>
   );
 }
+    

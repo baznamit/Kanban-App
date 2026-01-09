@@ -42,7 +42,7 @@ export default function Deals() {
   const columns = groupedDeals();
 
   return (
-    <div style={{ padding: 20 }}>
+    <div className="page">
       <h2>Deal Pipeline</h2>
 
       <DragDropContext onDragEnd={onDragEnd}>
@@ -54,11 +54,12 @@ export default function Deals() {
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                   style={{
-                    width: 220,
-                    minHeight: 400,
-                    background: "#e9ecef",
-                    padding: 8,
-                    borderRadius: 6,
+                    width: 230,
+                    minHeight: 420,
+                    background: "#f1f3f5",
+                    padding: 12,
+                    borderRadius: 10,
+                    boxShadow: "inset 0 0 0 1px #ddd",
                   }}
                 >
                   <h4>{stage.label}</h4>
@@ -75,11 +76,12 @@ export default function Deals() {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                           style={{
-                            padding: 8,
-                            marginBottom: 8,
+                            padding: 10,
+                            marginBottom: 10,
                             background: "white",
-                            borderRadius: 4,
-                            boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+                            borderRadius: 8,
+                            boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+                            fontSize: 14,
                             ...provided.draggableProps.style,
                           }}
                         >
@@ -87,7 +89,11 @@ export default function Deals() {
                             href={`/deals/${deal.id}/memo`}
                             style={{ textDecoration: "none", color: "#111" }}
                           >
-                            <strong>{deal.name}</strong>
+                            <strong
+                              style={{ display: "block", marginBottom: 4 }}
+                            >
+                              {deal.name}
+                            </strong>
                           </a>
                         </div>
                       )}
